@@ -1,6 +1,5 @@
 import React from "react";
 import Helpers from "../../utils/Helpers";
-import './Stopwatch.css';
 import Card from '../../UI/Card';
 
 

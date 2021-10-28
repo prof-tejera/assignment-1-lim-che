@@ -1,8 +1,12 @@
 import React from "react";
+import Count from "../../utils/Count";
+import Card from "../../UI/Card";
+
 
 class Countdown extends React.Component {
+
   render() {
-    return null;
+    return (<Card><Count></Count></Card>);
   }
 }
 

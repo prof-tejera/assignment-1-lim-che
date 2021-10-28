@@ -1,39 +1,39 @@
 import React, { useState } from "react";
-import Display from "../views/Display";
+import CountForm from "./CountForm";
+import CountDownDisplay from "../views/CountDownDisplay";
 import Button from "../views/Button";
 
-const Helpers = () => {
-  const [time, setTime] = useState({ milisec: 0, sec: 0, min: 0, hr: 0 });
+
+const Count = (props) => {
+  const [time, setTime] = useState({sec: 0, min: 0, hr: 1});
   const [interval, setI] = useState();
   const [state, setState] = useState(0);
 
   const start = () => {
     run();
     setState(1); //start
-    setI(setInterval(run, 10));
+    setI(setInterval(run, 1000));
   };
 
-  let newMilisec = time.milisec,
-    newSec = time.sec,
+  let newSec = time.sec,
     newMin = time.min,
     newHr = time.hr;
 
   const run = () => {
-    if (newMin === 60) {
-      newHr++;
-      newMin = 0;
+    if (newSec === 0 && newMin ===0 && newHr === 0){
+        return stop();
     }
-    if (newSec === 60) {
-      newMin++;
-      newSec = 0;
+    if (newMin <= 0) {
+      newHr--;
+      newMin = 60;
     }
-    if (newMilisec === 100) {
-      newSec++;
-      newMilisec = 0;
+    if (newSec <= 0) {
+      newMin--;
+      newSec = 60;
     }
-    newMilisec++;
+
+    newSec--;
     return setTime({
-      milisec: newMilisec,
       sec: newSec,
       min: newMin,
       hr: newHr,
@@ -55,14 +55,32 @@ const Helpers = () => {
 
     const resume = () => start();
 
+
+    const countDown = (data) => {
+        reset();
+     const timesdata = {
+         ...data
+     }
+     
+     console.log(data);
+     setTime(data);
+     start();
+    }
+
+      
+
+
   return (
     <div>
       <div>
-        <Display time={time} />
+        <CountForm times={countDown}/>
+        <CountDownDisplay time={time} />
         <Button  state={state} reset={reset} stop={stop} start={start} resume={resume} />
       </div>
+
     </div>
   );
 };
 
-export default Helpers;
+
+export default Count;

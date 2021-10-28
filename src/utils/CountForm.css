@@ -1,0 +1,17 @@
+label{
+    font-size: medium;
+    color: rgb(27, 6, 141);
+}
+
+input {
+    color: rgb(250, 235, 215);
+}
+
+.div{
+    width: 150%;
+    height: 200%;
+}
+
+button {
+    font-size: 12px;
+}
